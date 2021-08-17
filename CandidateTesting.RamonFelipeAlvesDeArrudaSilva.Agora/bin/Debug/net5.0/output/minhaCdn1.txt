@@ -1,0 +1,4 @@
+"Minha CDN" GET 200 /robots.txt 100 312 HIT
+"Minha CDN" POST 200 /myImages 319 101 MISS
+"Minha CDN" GET 404 /not-found 142 199 MISS
+"Minha CDN" GET 200 /robots.txt 245 312 INVALIDATE
