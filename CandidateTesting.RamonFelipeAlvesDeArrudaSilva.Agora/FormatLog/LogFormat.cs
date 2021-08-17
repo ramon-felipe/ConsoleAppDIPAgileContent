@@ -4,6 +4,7 @@ using CandidateTesting.RamonFelipeAlvesDeArrudaSilva.Agora.Persistance;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Linq;
+using System;
 
 namespace CandidateTesting.RamonFelipeAlvesDeArrudaSilva.Agora.FormatLog
 {
@@ -23,11 +24,18 @@ namespace CandidateTesting.RamonFelipeAlvesDeArrudaSilva.Agora.FormatLog
         /// <returns></returns>
         public async Task<IEnumerable<string>> FormatLog(string logUri)
         {
-            var logContent = await _filePersistance.GetLogContentAsList(logUri);
-            var logAsCdnFormatList = logContent.ToMinhaCdnModel();
-            var logAsAgoraFormatList = logAsCdnFormatList.ToAgoraModel();
+            try
+            {
+                var logContent = await _filePersistance.GetLogContentAsList(logUri);
+                var logAsCdnFormatList = logContent.ToMinhaCdnModel();
+                var logAsAgoraFormatList = logAsCdnFormatList.ToAgoraModel();
 
-            return ToListOfString(logAsAgoraFormatList);
+                return ToListOfString(logAsAgoraFormatList);
+            }
+            catch (Exception e)
+            {
+                throw new Exception($"Error formatting the log.\n{e.Message}");
+            }
         }
 
         /// <summary>

@@ -2,7 +2,6 @@
 using CandidateTesting.RamonFelipeAlvesDeArrudaSilva.Agora.Persistance;
 using CandidateTesting.RamonFelipeAlvesDeArrudaSilva.Agora.RestRequest;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 using System;
 using System.Threading.Tasks;
 
@@ -18,7 +17,7 @@ namespace CandidateTesting.RamonFelipeAlvesDeArrudaSilva.Agora
         static void Main(string[] args)
         {
             if (!AreArgsValid(args))
-                return;
+                throw new ArgumentOutOfRangeException("You need to pass two parameters (sourceUrl and targePath).");
 
             ConfigureServices(serviceCollection);
 
@@ -57,7 +56,6 @@ namespace CandidateTesting.RamonFelipeAlvesDeArrudaSilva.Agora
                 if (args.Length != 2)
                 {
 
-                    Console.WriteLine("You need to pass two parameters (sourceUrl and targePath).");
                     return false;
                 }
 
